@@ -2,6 +2,5 @@
 /_dist
 /.vscode
 /node_modules
-/local.env
 **/.DS_Store
 tool
