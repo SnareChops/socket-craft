@@ -31,7 +31,7 @@ services:
       - local.env
 
   site:
-    image: socket-craft/client:latest
+    image: socket-craft/site:latest
 
   nginx:
     image: nginx:alpine

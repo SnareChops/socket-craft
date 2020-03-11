@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -10,8 +9,6 @@ import (
 )
 
 func main() {
-	fmt.Printf("%v\n", os.Environ())
-
 	s := &service.StandardService{}
 
 	s.AddSocket(service.Actions{}, nil)

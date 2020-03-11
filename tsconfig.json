@@ -17,5 +17,5 @@
     "skipLibCheck": true,
     "lib": ["es2015", "dom"]
   },
-  "include": ["client"]
+  "include": ["site"]
 }
