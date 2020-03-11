@@ -1,0 +1,33 @@
+method-gem {
+  display: block;
+  height: 45px;
+  width: 45px;
+  font-size: 2em;
+  background: var(--foreground-color);
+
+  &[method='call'] {
+    background: red;
+  }
+  &[method='publish'] {
+    background: green;
+  }
+  &[method='subscribe'] {
+    background: blue;
+  }
+  &[method='register'] {
+    background: white;
+  }
+}
+
+method-socket {
+  display: block;
+  height: 50px;
+  width: 50px;
+  border: 2px solid var(--dark-accent-color);
+  border-radius: 10px;
+  background: var(--foreground-color);
+
+  &.drop-highlight {
+    border-color: var(--accent-color);
+  }
+}

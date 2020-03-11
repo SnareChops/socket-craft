@@ -1,0 +1,22 @@
+:root {
+  --background-color: #091833;
+  --foreground-color: #133e7c;
+  --accent-color: #ea00d9;
+  --highlight-color: #0abdc6;
+  --dark-accent-color: #711c91;
+}
+@import './fonts.scss';
+@import './crafting-menu.scss';
+@import './inventory.scss';
+@import './methods.scss';
+
+body {
+  font-family: blanka;
+  background: var(--background-color);
+  padding: 0;
+  margin: 0;
+}
+
+socket-craft {
+  display: flex;
+}

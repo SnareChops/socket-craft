@@ -1,0 +1,6 @@
+/_db_data
+/_dist
+/.vscode
+/node_modules
+/local.env
+**/.DS_Store

@@ -1,0 +1,24 @@
+{
+  "name": "socket-craft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "npx sass sass/index.scss dist/index.css",
+    "build-client": "npx tsc && npx webpack",
+    "client": "npm run build-client && docker build -f client.docker --target release -t socket-craft/client .",
+    "server": "docker build -f server.docker --target release -t socket-craft/server .",
+    "nexus": "docker build -f nexus.docker --target release -t socket-craft/nexus ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.26.2",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.2"
+  }
+}

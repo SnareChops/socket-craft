@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
+    volumes:
+      - ./_db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: socket-craft
+    healthcheck:
+      test: mysqladmin -uroot -proot ping
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    ports:
+      - 3306:3306
+
+  nexus:
+    image: socket-craft/nexus:latest
+    env_file:
+      - local.env
+
+  server:
+    image: socket-craft/server:latest
+    depends_on: 
+      - nexus
+    env_file:
+      - local.env
+
+  site:
+    image: socket-craft/client:latest
+
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - site
+      - nexus
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/localhost.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt
+      - ./nginx/localhost.key:/etc/ssl/private/localhost.key

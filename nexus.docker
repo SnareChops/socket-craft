@@ -1,0 +1,18 @@
+FROM golang:alpine as base
+RUN apk --no-cache add git ca-certificates g++
+WORKDIR /repos/nexus
+ADD go.mod go.sum ./
+RUN go mod download
+
+FROM base as builder
+WORKDIR /repos/nexus
+ADD go.sum go.sum
+ADD go.mod go.mod
+ADD nexus nexus
+ADD conv conv
+RUN CGO_ENABLED=0 GOOS=linux go build -o bin ./nexus
+
+FROM scratch as release
+COPY --from=builder /repos/nexus/bin /bin
+EXPOSE 8080
+ENTRYPOINT ["/bin"]

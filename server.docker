@@ -1,0 +1,17 @@
+FROM golang:alpine as base
+RUN apk --no-cache add git ca-certificates g++
+WORKDIR /repos/server
+ADD go.mod go.sum ./
+RUN go mod download
+
+FROM base as builder
+WORKDIR /repos/server
+ADD go.sum go.sum
+ADD go.mod go.mod
+ADD server server
+RUN CGO_ENABLED=0 GOOS=linux go build -o bin ./server
+
+FROM scratch as release
+COPY --from=builder /repos/server/bin /bin
+EXPOSE 8080
+ENTRYPOINT ["/bin"]

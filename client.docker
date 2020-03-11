@@ -1,0 +1,6 @@
+FROM pierrezemb/gostatic as release
+COPY _dist/bundle.js /srv/http/index.js
+COPY _dist/index.css /srv/http/index.css
+COPY client/index.html /srv/http/index.html
+COPY assets /srv/http/assets
+ENTRYPOINT ["/goStatic"]
